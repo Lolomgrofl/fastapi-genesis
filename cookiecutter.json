@@ -1,0 +1,6 @@
+{
+    "repo_name": "fastapi_genesis",
+    "app_service_name": "klout",
+    "db_service_name": "klout-db",
+    "pgadmin_service_name": "klout-pgadmin"
+}

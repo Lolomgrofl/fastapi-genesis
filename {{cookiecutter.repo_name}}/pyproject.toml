@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "fastapi-genesis"
+version = "0.1.0"
+description = "FastAPI code Template"
+authors = ["Luka Vuksanovic <luka.vuksanovic35@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+black = "^23.7.0"
+alembic = "^1.11.1"
+fastapi = {extras = ["all"], version = "^0.100.0"}
+loguru = "^0.7.0"
+pydantic = "^2.0.2"
+flake8 = "^6.0.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

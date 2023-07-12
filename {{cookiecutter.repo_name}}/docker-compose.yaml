@@ -1,0 +1,57 @@
+version: "3.9"
+
+services:
+  app:
+    container_name: "{{ cookiecutter.app_service_name }}"
+    build: .
+    command: bash -c "alembic upgrade head && uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload"
+    volumes:
+      - .:/app
+    ports:
+      - 8000:8000
+    depends_on:
+      - db
+    restart: always
+    networks:
+      - klout
+
+  db:
+    container_name: "{{ cookiecutter.db_service_name }}"
+    image: postgres:latest
+    restart: always
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB}
+    env_file:
+      - .env
+    networks:
+      - klout
+  
+  pgadmin:
+    container_name: "{{ cookiecutter.pgadmin_service_name }}"
+    image: dpage/pgadmin4
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=${PGADMIN_EMAIL}
+      - PGADMIN_DEFAULT_PASSWORD=${PGADMIN_PASSWORD}
+    ports:
+      - 5050:80
+    depends_on:
+      - db
+    restart: always
+    env_file:
+      - .env
+    networks:
+      - klout
+
+volumes:
+  postgres_data:
+
+
+networks:
+  klout:
+    driver: bridge
