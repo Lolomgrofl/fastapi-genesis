@@ -3,7 +3,7 @@ from datetime import timedelta
 from app.dao import user
 from app.db import get_session
 from app.schemas.token import Token, TokenData
-from app.schemas.user import UserOut
+from app.schemas.user import UserIn, UserOut
 from app.services.utils import (
     UtilsService,
     oauth2_scheme,
@@ -12,10 +12,26 @@ from app.settings import settings
 from fastapi import Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordRequestForm
 from jose import JWTError, jwt
+from loguru import logger
 from sqlalchemy.orm import Session
 
 
 class UserService:
+    @staticmethod
+    async def register_user(request: UserIn, session: Session):
+        user_exist = await UserService.user_email_exists(session, request.email)
+
+        if user_exist:
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail="User with the given email already exists!!!",
+            )
+
+        request.password = UtilsService.get_password_hash(request.password)
+        new_user = await user.UserDao(session).create(**request.model_dump())
+        logger.info(f"New user created successfully: {new_user}")
+        return new_user
+
     @staticmethod
     async def authenticate_user(session: Session, email: str, password: str):
         _user = await user.UserDao(session).get_by_email(email)
@@ -24,6 +40,11 @@ class UserService:
         if not UtilsService.verify_password(password, _user.password):
             return False
         return _user
+
+    @staticmethod
+    async def user_email_exists(session: Session, email):
+        _user = await user.UserDao(session).get_by_email(email)
+        return _user if _user else None
 
     @staticmethod
     async def login(form_data: OAuth2PasswordRequestForm, session: Session) -> Token:
@@ -68,4 +89,4 @@ class UserService:
         _user = await user.UserDao(session).get_by_email(email=token_data.email)
         if _user is None:
             raise credentials_exception
-        return UserOut.from_orm(_user)
+        return UserOut.model_validate(_user)
