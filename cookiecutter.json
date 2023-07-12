@@ -2,5 +2,6 @@
     "repo_name": "fastapi_genesis",
     "app_service_name": "fastapi",
     "db_service_name": "fastdb",
-    "pgadmin_service_name": "fastpgadmin"
+    "pgadmin_service_name": "fastpgadmin",
+    "network_name": "fastnetwork"
 }

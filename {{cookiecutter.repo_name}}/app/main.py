@@ -3,7 +3,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 
-app = FastAPI(title="So Fast Project", version="0.0.1")
+app = FastAPI(title="So Fast Project", version="0.1.0")
 
 app.add_middleware(
     CORSMiddleware,
