@@ -13,7 +13,7 @@ services:
       - db
     restart: always
     networks:
-      - klout
+      - "{{cookiecutter.network_name}}"
 
   db:
     container_name: "{{ cookiecutter.db_service_name }}"
@@ -30,7 +30,7 @@ services:
     env_file:
       - .env
     networks:
-      - klout
+      - "{{cookiecutter.network_name}}"
   
   pgadmin:
     container_name: "{{ cookiecutter.pgadmin_service_name }}"
@@ -46,12 +46,12 @@ services:
     env_file:
       - .env
     networks:
-      - klout
+      - "{{cookiecutter.network_name}}"
 
 volumes:
   postgres_data:
 
 
 networks:
-  klout:
+  fastnetwork:
     driver: bridge

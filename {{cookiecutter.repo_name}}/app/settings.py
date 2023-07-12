@@ -1,7 +1,7 @@
-from pydantic import BaseSettings
+from pydantic_settings import BaseSettings
 
 
-class Config(BaseSettings):
+class Settings(BaseSettings):
     POSTGRES_USER: str
     POSTGRES_PASSWORD: str
     POSTGRES_HOST: str
@@ -10,9 +10,13 @@ class Config(BaseSettings):
     PGADMIN_EMAIL: str
     PGADMIN_PASSWORD: str
     SQLALCHEMY_URL: str
+    SECRET_KEY: str
+    ALGORITHM: str
+    ACCESS_TOKEN_EXPIRE_MINUTES: int
+    DATE_FORMAT: str
 
     class Config:
         env_file = "./.env"
 
 
-settings = Config()
+settings = Settings()

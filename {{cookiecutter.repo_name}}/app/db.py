@@ -1,4 +1,4 @@
-from app.config import settings
+from app.settings import settings
 from loguru import logger
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
@@ -14,8 +14,8 @@ def get_session():
     try:
         yield session
     except Exception as err:
-        logger.exception(f"Something broke... Rollback!!! Error:{err}", exc_info=err)
+        logger.exception("Something broke...Rollback!!!", exc_info=err)
         session.rollback()
     finally:
         session.close()
-        logger.info("Connection closed!")
+        logger.info("Connection closed!!!")
