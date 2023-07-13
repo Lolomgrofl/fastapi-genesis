@@ -1,25 +1,27 @@
 [tool.poetry]
-name = "fastapi-genesis"
+name = "app"
 version = "0.1.0"
-description = "FastAPI Genesis code template - Good luck!!! :)"
-authors = ["Luka Vuksanovic <luka.vuksanovic35@gmail.com>"]
+description = ""
+authors = ["User <user@example.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.10"
-black = "^23.7.0"
 alembic = "^1.11.1"
 loguru = "^0.7.0"
-flake8 = "^6.0.0"
 docker-compose = "^1.29.2"
 fastapi = {extras = ["all"], version = "^0.100.0"}
 python-jose = {extras = ["cryptography"], version = "^3.3.0"}
 passlib = {extras = ["bcrypt"], version = "^1.7.4"}
 psycopg2-binary = "^2.9.6"
-pytest = "^7.4.0"
-pre-commit = "^3.3.3"
-cookiecutter = "^2.2.3"
 
+
+[tool.poetry.group.dev.dependencies]
+isort = "^5.12.0"
+mypy = "^1.4.1"
+black = "^23.7.0"
+pytest = "^7.4.0"
+flake8 = "^6.0.0"
 
 [build-system]
 requires = ["poetry-core"]

@@ -1,5 +1,5 @@
-# FastAPI Genesis Project Template Generator
-FastAPI project template with Docker, Alembic, PostgreSQL, Poetry and pre-commit
+# FastAPI Genesis - Project Template Generator
+Simple FastAPI project template with Docker, Alembic, PostgreSQL, Poetry and pre-commit
 
 ## How to use it
 
@@ -10,7 +10,9 @@ pip install cookiecutter
 cookiecutter https://github.com/Lolomgrofl/fastapi_genesis.git
 ```
 
+## What's included in the template
 
+- Here is an explanation of the directory structure of the template:
 ```
 ├── alembic                 <- Alembic migrations
 │
