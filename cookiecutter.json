@@ -3,5 +3,8 @@
     "app_service_name": "fastapi",
     "db_service_name": "fastdb",
     "pgadmin_service_name": "fastpgadmin",
-    "network_name": "fastnetwork"
+    "network_name": "fastnetwork",
+    "app_port": "8000",
+    "db_port": "5432",
+    "pgadmin_port": "5050"
 }

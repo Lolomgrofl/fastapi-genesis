@@ -4,16 +4,16 @@ services:
   app:
     container_name: "{{ cookiecutter.app_service_name }}"
     build: .
-    command: bash -c "alembic upgrade head && uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload"
+    command: bash -c "alembic upgrade head && uvicorn app.main:app --host 0.0.0.0 --port {{cookiecutter.app_port}} --reload"
     volumes:
       - .:/app
     ports:
-      - 8000:8000
+      - "{{cookiecutter.app_port}}:{{ cookiecutter.app_port }}"
     depends_on:
       - db
     restart: always
     networks:
-      - "{{cookiecutter.network_name}}"
+      - "{{ cookiecutter.network_name }}"
 
   db:
     container_name: "{{ cookiecutter.db_service_name }}"
@@ -22,7 +22,7 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data/
     ports:
-      - "5432:5432"
+      - "{{ cookiecutter.db_port }}:5432"
     environment:
       - POSTGRES_USER=${POSTGRES_USER}
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
@@ -30,8 +30,8 @@ services:
     env_file:
       - .env
     networks:
-      - "{{cookiecutter.network_name}}"
-  
+      - "{{ cookiecutter.network_name }}"
+
   pgadmin:
     container_name: "{{ cookiecutter.pgadmin_service_name }}"
     image: dpage/pgadmin4
@@ -39,19 +39,19 @@ services:
       - PGADMIN_DEFAULT_EMAIL=${PGADMIN_EMAIL}
       - PGADMIN_DEFAULT_PASSWORD=${PGADMIN_PASSWORD}
     ports:
-      - 5050:80
+      - "{{ cookiecutter.pgadmin_port }}:80"
     depends_on:
       - db
     restart: always
     env_file:
       - .env
     networks:
-      - "{{cookiecutter.network_name}}"
+      - "{{ cookiecutter.network_name }}"
 
 volumes:
   postgres_data:
 
 
 networks:
-  fastnetwork:
+  {{ cookiecutter.network_name }}:
     driver: bridge
