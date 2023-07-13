@@ -5,13 +5,13 @@ repos:
     rev: v0.0.275
     hooks:
     - id: ruff
-      args: [ --fix, --exit-non-zero-on-fix]
+      args: [ --fix, --exit-non-zero-on-fix, --exclude, alembic]
 
   - repo: https://github.com/psf/black
     rev: 23.1.0
     hooks:
       - id: black
-        args: [--safe]
+        args: [--safe,  --exclude, alembic]
 
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v4.4.0
