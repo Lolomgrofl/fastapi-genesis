@@ -23,7 +23,7 @@ To set up and run the app, please follow these steps:
    If you also want to install development packages,
    you can use the following command instead:
    ```shell
-   poetry install --dev
+   poetry install --with dev
    ```
 3. Build and start the Docker containers:
 
