@@ -50,3 +50,27 @@ cookiecutter https://github.com/Lolomgrofl/fastapi_genesis.git
 │
 └── setup.cfg               <- Configuration of various tools (pytest, flake8, black, isort)
 ```
+
+## Features
+
+- **Docker** and **docker-compose** for local development
+- **FastAPI** application with **uvicorn** server
+- **Poetry** for managing Python dependencies
+- **Alembic** for database migrations
+- **Pre-commit** hooks for code formatting and linting
+- **JWT** token authentication
+- **SQLAlchemy** models
+- **CORS** (Cross Origin Resource Sharing)
+
+## User flow as an example of how to use the template
+
+- It consists of the following steps:
+```
+    - Register a new user
+    - Login with the new user
+    - Get all users
+    - Delete all users
+```
+- This following example will show you the pattern and good practices to follow in order to continue developing your application.
+
+# GLHF 🚀
