@@ -15,8 +15,6 @@ docker-compose = "^1.29.2"
 fastapi = {extras = ["all"], version = "^0.100.0"}
 python-jose = {extras = ["cryptography"], version = "^3.3.0"}
 passlib = {extras = ["bcrypt"], version = "^1.7.4"}
-cookiecutter = "^2.2.3" # to_delete
-bump-pydantic = "^0.3.0" # to_delete
 psycopg2-binary = "^2.9.6"
 pytest = "^7.4.0"
 pre-commit = "^3.3.3"
