@@ -15,11 +15,11 @@ class UserDao(BaseDao):
         self.session.refresh(_user)
         return _user
 
-    async def get_by_id(self, user_id: int) -> User:
+    async def get_by_id(self, user_id: int) -> "User|None":
         statement = select(User).where(User.id == user_id)
         return self.session.scalar(statement=statement)
 
-    async def get_by_email(self, email) -> User:
+    async def get_by_email(self, email) -> "User|None":
         statement = select(User).where(User.email == email)
         return self.session.scalar(statement=statement)
 
@@ -29,3 +29,4 @@ class UserDao(BaseDao):
 
     async def delete_all(self) -> None:
         self.session.execute(delete(User))
+        self.session.commit()

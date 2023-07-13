@@ -91,3 +91,16 @@ class UserService:
         if not _user:
             raise credentials_exception
         return UserOut.model_validate(_user)
+
+    @staticmethod
+    async def get_all_users(session: Session = Depends(get_session)):
+        all_users = await user.UserDao(session).get_all()
+        return [UserOut.model_validate(_user) for _user in all_users]
+
+    @staticmethod
+    async def delete_all_users(session: Session = Depends(get_session)):
+        await user.UserDao(session).delete_all()
+        return JSONResponse(
+            content={"message": "All users deleted successfully!!!"},
+            status_code=status.HTTP_200_OK,
+        )
