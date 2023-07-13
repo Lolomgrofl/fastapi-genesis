@@ -1,10 +1,10 @@
 {
     "repo_name": "fastapi_genesis",
-    "app_service_name": "fastapi",
-    "db_service_name": "fastdb",
-    "pgadmin_service_name": "fastpgadmin",
-    "network_name": "fastnetwork",
-    "app_port": "8000",
-    "db_port": "5432",
-    "pgadmin_port": "5050"
+    "app_service_name": "fast_app",
+    "app_service_port": "8000",
+    "db_service_name": "fast_db",
+    "db_service_port": "5432",
+    "pgadmin_service_name": "fast_pgadmin",
+    "pgadmin_service_port": "5050",
+    "network_name": "fast_network"
 }
