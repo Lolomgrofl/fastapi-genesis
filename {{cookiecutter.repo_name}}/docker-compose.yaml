@@ -4,11 +4,11 @@ services:
   app:
     container_name: "{{ cookiecutter.app_service_name }}"
     build: .
-    command: bash -c "alembic upgrade head && uvicorn app.main:app --host 0.0.0.0 --port {{cookiecutter.app_port}} --reload"
+    command: bash -c "alembic upgrade head && uvicorn app.main:app --host 0.0.0.0 --port {{ cookiecutter.app_port }} --reload"
     volumes:
       - .:/app
     ports:
-      - "{{cookiecutter.app_port}}:{{ cookiecutter.app_port }}"
+      - "{{ cookiecutter.app_port }}:{{ cookiecutter.app_port }}"
     depends_on:
       - db
     restart: always
