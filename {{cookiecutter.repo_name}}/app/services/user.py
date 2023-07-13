@@ -4,12 +4,10 @@ from app.dao import user
 from app.db import get_session
 from app.schemas.token import Token, TokenData
 from app.schemas.user import UserIn, UserOut
-from app.services.utils import (
-    UtilsService,
-    oauth2_scheme,
-)
+from app.services.utils import UtilsService, oauth2_scheme
 from app.settings import settings
 from fastapi import Depends, HTTPException, status
+from fastapi.responses import JSONResponse
 from fastapi.security import OAuth2PasswordRequestForm
 from jose import JWTError, jwt
 from loguru import logger
@@ -18,8 +16,8 @@ from sqlalchemy.orm import Session
 
 class UserService:
     @staticmethod
-    async def register_user(request: UserIn, session: Session):
-        user_exist = await UserService.user_email_exists(session, request.email)
+    async def register_user(user_data: UserIn, session: Session):
+        user_exist = await UserService.user_email_exists(session, user_data.email)
 
         if user_exist:
             raise HTTPException(
@@ -27,10 +25,13 @@ class UserService:
                 detail="User with the given email already exists!!!",
             )
 
-        request.password = UtilsService.get_password_hash(request.password)
-        new_user = await user.UserDao(session).create(**request.model_dump())
-        logger.info(f"New user created successfully: {new_user}")
-        return new_user
+        user_data.password = UtilsService.get_password_hash(user_data.password)
+        new_user = await user.UserDao(session).create(user_data.model_dump())
+        logger.info(f"New user created successfully: {new_user}!!!")
+        return JSONResponse(
+            content={"message": "User created successfully"},
+            status_code=status.HTTP_201_CREATED,
+        )
 
     @staticmethod
     async def authenticate_user(session: Session, email: str, password: str):
@@ -81,12 +82,12 @@ class UserService:
                 token, settings.SECRET_KEY, algorithms=[settings.ALGORITHM]
             )
             email: str = payload.get("sub")
-            if email is None:
+            if not email:
                 raise credentials_exception
             token_data = TokenData(email=email)
         except JWTError:
             raise credentials_exception
         _user = await user.UserDao(session).get_by_email(email=token_data.email)
-        if _user is None:
+        if not _user:
             raise credentials_exception
         return UserOut.model_validate(_user)

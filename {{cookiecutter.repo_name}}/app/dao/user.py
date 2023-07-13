@@ -8,8 +8,8 @@ class UserDao(BaseDao):
     def __init__(self, session: Session) -> None:
         super().__init__(session)
 
-    async def create(self, request) -> User:
-        _user = User(request)
+    async def create(self, user_data) -> User:
+        _user = User(**user_data)
         self.session.add(_user)
         self.session.commit()
         self.session.refresh(_user)
