@@ -1,6 +1,6 @@
 from datetime import timedelta
 
-from app.dao import user
+from app.daos import user
 from app.db import get_session
 from app.schemas.token import Token, TokenData
 from app.schemas.user import UserIn, UserOut

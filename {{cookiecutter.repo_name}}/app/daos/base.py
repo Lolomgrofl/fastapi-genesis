@@ -21,6 +21,3 @@ class BaseDao(ABC):
     @abstractmethod
     async def delete_all(self):
         pass
-
-
-

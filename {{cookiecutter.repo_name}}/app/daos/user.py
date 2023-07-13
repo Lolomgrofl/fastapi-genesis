@@ -1,4 +1,4 @@
-from app.dao.base import BaseDao
+from app.daos.base import BaseDao
 from app.models.user import User
 from sqlalchemy import delete, select
 from sqlalchemy.orm import Session
