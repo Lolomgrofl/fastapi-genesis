@@ -12,15 +12,15 @@ oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/api/v1/user/token")
 
 class UtilsService:
     @staticmethod
-    def verify_password(plain_password, hashed_password):
+    def verify_password(plain_password, hashed_password) -> bool:
         return pwd_context.verify(plain_password, hashed_password)
 
     @staticmethod
-    def get_password_hash(password):
+    def get_password_hash(password) -> str:
         return pwd_context.hash(password)
 
     @staticmethod
-    def create_access_token(data: dict, expires_delta: timedelta | None = None):
+    def create_access_token(data: dict, expires_delta: timedelta | None = None) -> str:
         to_encode = data.copy()
         if expires_delta:
             expire = datetime.utcnow() + expires_delta
