@@ -3,7 +3,8 @@ from loguru import logger
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
-postgres_url = settings.SQLALCHEMY_URL
+
+postgres_url = settings.POSTGRES_URL
 
 engine = create_engine(postgres_url, echo=True)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)

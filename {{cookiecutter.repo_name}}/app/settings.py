@@ -9,7 +9,7 @@ class Settings(BaseSettings):
     POSTGRES_DB: str
     PGADMIN_EMAIL: str
     PGADMIN_PASSWORD: str
-    SQLALCHEMY_URL: str
+    POSTGRES_URL: str
     SECRET_KEY: str
     ALGORITHM: str
     ACCESS_TOKEN_EXPIRE_MINUTES: int
