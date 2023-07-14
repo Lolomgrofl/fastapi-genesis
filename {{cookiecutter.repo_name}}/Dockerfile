@@ -26,4 +26,4 @@ RUN poetry config virtualenvs.create false \
 COPY . /app/
 
 # Expose the application port
-EXPOSE 8000
+EXPOSE {{ cookiecutter.app_service_port }}
