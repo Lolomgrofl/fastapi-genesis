@@ -1,5 +1,5 @@
 # FastAPI Genesis 🧬 - Project Template Generator 🚀
-Simple FastAPI project template with Docker, Alembic, PostgreSQL, Poetry and pre-commit
+Simple FastAPI project template with Docker, Alembic, PostgreSQL, Poetry and pre-commit to kickstart your new projects.
 
 ## How to use it
 
