@@ -2,7 +2,7 @@ version: "3.9"
 
 services:
   app:
-    container_name: "{{ cookiecutter.app_service_name }}"
+    container_name: "{{ cookiecutter.app_container_name }}"
     build: .
     command: bash -c "alembic upgrade head && uvicorn app.main:app --host 0.0.0.0 --port {{ cookiecutter.app_service_port }} --reload"
     volumes:
@@ -16,7 +16,7 @@ services:
       - "{{ cookiecutter.network_name }}"
 
   db:
-    container_name: "{{ cookiecutter.db_service_name }}"
+    container_name: "{{ cookiecutter.db_container_name }}"
     image: postgres:latest
     restart: always
     volumes:
@@ -33,7 +33,7 @@ services:
       - "{{ cookiecutter.network_name }}"
 
   pgadmin:
-    container_name: "{{ cookiecutter.pgadmin_service_name }}"
+    container_name: "{{ cookiecutter.pgadmin_container_name }}"
     image: dpage/pgadmin4
     environment:
       - PGADMIN_DEFAULT_EMAIL=${PGADMIN_EMAIL}
