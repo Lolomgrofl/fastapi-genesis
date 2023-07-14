@@ -25,17 +25,23 @@ To set up and run the app, please follow these steps:
    ```shell
    poetry install --with dev
    ```
-3. Build and start the Docker containers:
+3. Activate the virtual environment:
+
+   ```shell
+   poetry shell
+   ```
+4. Build and start the Docker containers:
 
    ```shell
    docker-compose up --build
    ```
-4. Open your browser and go to `http://localhost:{{ cookiecutter.app_service_port }}` to see the app running.
+5. Open your browser and go to `http://localhost:{{ cookiecutter.app_service_port }}` to see the app running.
 
-5. Since there is only one SQLAlchemy model, you can create a new migration file by running the following command:
+6. Since there is only one SQLAlchemy model, you can create a new migration file by running the following command:
 
    ```shell
-   scripts/autogenerate.sh "user_init"
+   chmod -R +x scripts/
+   ./scripts/autogenerate.sh "user_init"
    ```
    This will create a new migration file in `{{ cookiecutter.repo_name }}/alembic/versions/`.
 
@@ -44,9 +50,9 @@ To set up and run the app, please follow these steps:
    docker-compose up
    ```
 
-6. To check the documentation of the API, go to `http://localhost:{{ cookiecutter.app_service_port }}/docs`.
+8. To check the documentation of the API, go to `http://localhost:{{ cookiecutter.app_service_port }}/docs`.
 
-7. To check the database you can use hosted `pgAdmin` tool, just go to `http://localhost:{{ cookiecutter.pgadmin_service_port }}` and login with the credentials from `.env` file:
+9. To check the database you can use hosted `pgAdmin` tool, just go to `http://localhost:{{ cookiecutter.pgadmin_service_port }}` and login with the credentials from `.env` file:
    - Email: `$PGADMIN_EMAIL`
    - Password: `$PGADMIN_PASSWORD`
 
