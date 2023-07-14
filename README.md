@@ -73,4 +73,17 @@ cookiecutter https://github.com/Lolomgrofl/fastapi_genesis.git
 ```
 - This following example will show you the pattern and good practices to follow in order to continue developing your application.
 
+
+## Cookiecutter parameters explained
+
+
+- `repo_name`: Name of the project repository (e.g. `my_project`)
+- `app_container_name`: Name of the Docker container for the FastAPI application server inside `docker-compose.yaml` file
+- `app_service_port`: Port on the host machine to which the FastAPI application will be exposed inside `docker-compose.yaml` file and `Dockerfile`
+- `db_container_name`: Name of the Docker container for the PostgreSQL database server inside `docker-compose.yaml` file
+- `db_service_port`: Port on the host machine to which the PostgreSQL database server will be exposed inside `docker-compose.yaml` file
+- `pgadmin_container_name`: Name of the Docker container for the pgAdmin web interface inside `docker-compose.yaml` file
+- `pgadmin_service_port`: Port on the host machine to which the pgAdmin web interface will be exposed inside `docker-compose.yaml` file
+- `network_name`: Name of the Docker network that will be created inside `docker-compose.yaml` file
+
 # GLHF 🚀

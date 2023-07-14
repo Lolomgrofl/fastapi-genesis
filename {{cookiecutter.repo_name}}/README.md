@@ -50,4 +50,4 @@ To set up and run the app, please follow these steps:
    - Email: `$PGADMIN_EMAIL`
    - Password: `$PGADMIN_PASSWORD`
 
-# ENJOY AND GOOD LUCK WITH YOUR PROJECT! 🚀
+# ENJOY AND GOOD LUCK WITH YOUR PROJECT! 🧬 🚀
