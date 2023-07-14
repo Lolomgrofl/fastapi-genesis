@@ -55,6 +55,7 @@ cookiecutter https://github.com/Lolomgrofl/fastapi_genesis.git
 
 - **Docker** and **docker-compose** for local development
 - **FastAPI** application with **uvicorn** server
+- **Pydantic** for data validation
 - **Poetry** for managing Python dependencies
 - **Alembic** for database migrations
 - **Pre-commit** hooks for code formatting and linting
