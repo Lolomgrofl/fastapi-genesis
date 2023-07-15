@@ -93,12 +93,12 @@ class UserService:
         return UserOut.model_validate(_user)
 
     @staticmethod
-    async def get_all_users(session: Session = Depends(get_session)):
+    async def get_all_users(session: Session):
         all_users = await user.UserDao(session).get_all()
         return [UserOut.model_validate(_user) for _user in all_users]
 
     @staticmethod
-    async def delete_all_users(session: Session = Depends(get_session)):
+    async def delete_all_users(session: Session):
         await user.UserDao(session).delete_all()
         return JSONResponse(
             content={"message": "All users deleted successfully!!!"},
