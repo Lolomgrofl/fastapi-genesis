@@ -1,6 +1,7 @@
 {
     "repo_name": "fastapi_genesis",
     "app_container_name": "fast_app",
+    "ci_cd": "github_actions",
     "app_service_port": "8000",
     "db_container_name": "fast_db",
     "db_service_port": "5432",
