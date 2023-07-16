@@ -1,22 +1,22 @@
-from app.settings import settings
-from loguru import logger
-from sqlalchemy import create_engine
+from collections.abc import AsyncGenerator
+
+from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine
 from sqlalchemy.orm import sessionmaker
 
+from app.settings import settings
 
-postgres_url = settings.POSTGRES_URL
+postgres_url = settings.POSTGRES_URL.unicode_string()
 
-engine = create_engine(postgres_url, echo=True)
-SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+engine = create_async_engine(postgres_url, echo=True, future=True)
+AsyncSessionFactory = sessionmaker(
+    autocommit=False,
+    autoflush=False,
+    expire_on_commit=False,
+    bind=engine,
+    class_=AsyncSession,
+)
 
 
-def get_session():
-    session = SessionLocal()
-    try:
+async def get_session() -> AsyncGenerator:
+    async with AsyncSessionFactory() as session:
         yield session
-    except Exception as err:
-        logger.exception("Something broke...Rollback!!!", exc_info=err)
-        session.rollback()
-    finally:
-        session.close()
-        logger.info("Connection closed!!!")

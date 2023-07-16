@@ -13,9 +13,9 @@ docker-compose = "^1.29.2"
 fastapi = {extras = ["all"], version = "^0.100.0"}
 python-jose = {extras = ["cryptography"], version = "^3.3.0"}
 passlib = {extras = ["bcrypt"], version = "^1.7.4"}
-psycopg2-binary = "^2.9.6"
 sqlalchemy = "^2.0.19"
 pydantic = "^2.0.3"
+asyncpg = "^0.28.0"
 
 
 [tool.poetry.group.dev.dependencies]
