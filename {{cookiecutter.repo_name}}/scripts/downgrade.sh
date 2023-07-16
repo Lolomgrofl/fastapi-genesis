@@ -8,6 +8,6 @@ docker-compose exec app alembic downgrade "-1"
 
 # If you need to go back multiple migrations, run
 #    alembic history
-# to view a list of all the migrations in your project (from newest to oldest), 
+# to view a list of all the migrations in your project (from newest to oldest),
 # then copy and paste the identifier of the migration you want to go back to:
 #    alembic downgrade 8ac14e223d1e

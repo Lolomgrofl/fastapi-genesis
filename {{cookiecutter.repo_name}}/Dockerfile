@@ -1,7 +1,11 @@
 FROM python:3.10-slim-bullseye as requirements-stage
+
 WORKDIR /tmp
+
 RUN pip install poetry
+
 COPY ./pyproject.toml ./poetry.lock* /tmp/
+
 # we export pyproject.toml which is poetry-native to plain requirements.txt that we can install with pip
 # as it's the recommended approach thanks to which we do not have to install poetry in production-stage image
 RUN poetry export -f requirements.txt --output requirements.txt --without-hashes

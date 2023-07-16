@@ -16,11 +16,11 @@ class UserDao(BaseDao):
         await self.session.refresh(_user)
         return _user
 
-    async def get_by_id(self, user_id: int) -> "User|None":
+    async def get_by_id(self, user_id: int) -> User | None:
         statement = select(User).where(User.id == user_id)
         return await self.session.scalar(statement=statement)
 
-    async def get_by_email(self, email) -> "User|None":
+    async def get_by_email(self, email) -> User | None:
         statement = select(User).where(User.email == email)
         return await self.session.scalar(statement=statement)
 
