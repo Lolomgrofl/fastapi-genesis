@@ -20,11 +20,13 @@ To set up and run the app, please follow these steps:
    ```shell
    poetry install
    ```
-   If you also want to install development packages,
+
+   If you don't want to install the dev packages,
    you can use the following command instead:
    ```shell
-   poetry install --with dev
+   poetry install --without dev
    ```
+
 3. Activate the virtual environment:
 
    ```shell
