@@ -1,7 +1,7 @@
 # FastAPI Genesis 🧬 - Project Template Generator 🚀
 Simple FastAPI project template with Docker, Alembic, PostgreSQL, Poetry and pre-commit to kickstart your new projects.
 
-## How to use it
+## How to use it 🤓
 
 Go to the directory where you want to create your project and run:
 
@@ -10,7 +10,7 @@ pip install cookiecutter
 cookiecutter https://github.com/Lolomgrofl/fastapi_genesis.git
 ```
 
-## What's included in the template
+## What's included in the template 🎉
 
 - Here is an explanation of the directory structure of the template:
 ```
@@ -51,7 +51,7 @@ cookiecutter https://github.com/Lolomgrofl/fastapi_genesis.git
 └── setup.cfg               <- Configuration of various tools (pytest, flake8, black, isort)
 ```
 
-## Features
+## Features 🧩 
 
 - **Docker** and **docker-compose** for local development
 - **FastAPI** application with **uvicorn** server
@@ -64,7 +64,7 @@ cookiecutter https://github.com/Lolomgrofl/fastapi_genesis.git
 - **SQLAlchemy** models
 - **CORS** (Cross Origin Resource Sharing)
 
-## User flow as an example of how to use the template
+## User flow as an example of how to use the template 💡
 
 - It consists of the following steps:
 ```
@@ -76,7 +76,7 @@ cookiecutter https://github.com/Lolomgrofl/fastapi_genesis.git
 - This following example will show you the pattern and good practices to follow in order to continue developing your application.
 
 
-## Cookiecutter parameters explained
+## Cookiecutter parameters explained 🍪
 
 
 - `repo_name`: Name of the project repository (e.g. `my_project`)
