@@ -31,7 +31,7 @@ async def login(current_user=Depends(UserService.get_current_user)):
     return current_user
 
 
-@router.get("/get_by_id/{user_id}", status_code=status.HTTP_200_OK)  # DONE
+@router.get("/get_by_id/{user_id}", status_code=status.HTTP_200_OK)
 async def get_user_by_id(
     user_id: int,
     session: AsyncSession = Depends(get_session),
@@ -44,7 +44,7 @@ async def get_all_users(session: AsyncSession = Depends(get_session)) -> list[Us
     return await UserService.get_all_users(session)
 
 
-@router.delete("/delete_by_id/{user_id}", status_code=status.HTTP_200_OK)  # DONE
+@router.delete("/delete_by_id/{user_id}", status_code=status.HTTP_200_OK)
 async def delete_user_by_id(
     user_id: int,
     session: AsyncSession = Depends(get_session),
