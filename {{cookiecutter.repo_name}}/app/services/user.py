@@ -10,7 +10,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from app.daos import user
 from app.db import get_session
 from app.schemas.token import Token, TokenData
-from app.schemas.user import ChangePasswordIn, UserIn, UserOut, UserUpdateIn
+from app.schemas.user import ChangePasswordIn, UserIn, UserOut
 from app.services.utils import UtilsService, oauth2_scheme
 from app.settings import settings
 
@@ -152,31 +152,3 @@ class UserService:
             content={"message": "User deleted successfully!!!"},
             status_code=status.HTTP_200_OK,
         )
-
-    @staticmethod
-    async def update_current_user(
-        user_data: UserUpdateIn,
-        current_user,
-        session: AsyncSession = Depends(get_session),
-    ):
-        updated_data = user_data.model_dump(exclude_unset=True)
-        if not updated_data:
-            raise HTTPException(
-                status_code=status.HTTP_400_BAD_REQUEST, detail="Empty user data!!!"
-            )
-        await user.UserDao(session).update_by_id(current_user.id, updated_data)
-        return JSONResponse(
-            content={"message": "User updated successfully!!!"},
-            status_code=status.HTTP_200_OK,
-        )
-
-    @staticmethod
-    async def update_user_by_id(
-        user_id: int, user_data: UserUpdateIn, session: AsyncSession
-    ):
-        updated_data = user_data.model_dump(exclude_unset=True)
-        if not updated_data:
-            raise HTTPException(
-                status_code=status.HTTP_400_BAD_REQUEST, detail="Empty user data!!!"
-            )
-        await user.UserDao(session).update_by_id(user_id, updated_data)
