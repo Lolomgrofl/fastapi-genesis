@@ -89,3 +89,7 @@ cookiecutter https://github.com/Lolomgrofl/fastapi_genesis.git
 - `network_name`: Name of the Docker network that will be created inside `docker-compose.yaml` file
 
 # GLHF 🚀
+
+## License
+
+This project is licensed under the terms of the MIT license.
