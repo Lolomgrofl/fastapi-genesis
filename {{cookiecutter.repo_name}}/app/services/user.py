@@ -10,7 +10,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from app.daos import user
 from app.db import get_session
 from app.schemas.token import Token, TokenData
-from app.schemas.user import UserIn, UserOut
+from app.schemas.user import ChangePasswordIn, UserIn, UserOut
 from app.services.utils import UtilsService, oauth2_scheme
 from app.settings import settings
 
@@ -44,7 +44,7 @@ class UserService:
         return _user
 
     @staticmethod
-    async def user_email_exists(session: AsyncSession, email):
+    async def user_email_exists(session: AsyncSession, email: str):
         _user = await user.UserDao(session).get_by_email(email)
         return _user if _user else None
 
@@ -106,5 +106,49 @@ class UserService:
         await user.UserDao(session).delete_all()
         return JSONResponse(
             content={"message": "All users deleted successfully!!!"},
+            status_code=status.HTTP_200_OK,
+        )
+
+    @staticmethod
+    async def change_password(
+        password_data: ChangePasswordIn,
+        current_user,
+        session: AsyncSession = Depends(get_session),
+    ):
+        _user = await user.UserDao(session).get_by_id(current_user.id)
+        logger.info(f"Current user: {current_user}")
+        if not UtilsService.verify_password(password_data.old_password, _user.password):
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail="Incorrect old password!!!",
+            )
+        _user.password = UtilsService.get_password_hash(password_data.new_password)
+        session.add(_user)
+        await session.commit()
+        return JSONResponse(
+            content={"message": "Password updated successfully!!!"},
+            status_code=status.HTTP_200_OK,
+        )
+
+    @staticmethod
+    async def get_user_by_id(user_id: int, session: AsyncSession) -> UserOut:
+        _user = await user.UserDao(session).get_by_id(user_id)
+        if not _user:
+            raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND,
+                detail="User with the given id does not exist!!!",
+            )
+        return UserOut.model_validate(_user)
+
+    @staticmethod
+    async def delete_user_by_id(user_id: int, session: AsyncSession):
+        _user = await user.UserDao(session).delete_by_id(user_id)
+        if not _user:
+            raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND,
+                detail="User with the given id does not exist!!!",
+            )
+        return JSONResponse(
+            content={"message": "User deleted successfully!!!"},
             status_code=status.HTTP_200_OK,
         )

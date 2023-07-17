@@ -32,3 +32,10 @@ class UserDao(BaseDao):
     async def delete_all(self) -> None:
         await self.session.execute(delete(User))
         await self.session.commit()
+
+    async def delete_by_id(self, user_id: int) -> User | None:
+        _user = await self.get_by_id(user_id=user_id)
+        statement = delete(User).where(User.id == user_id)
+        await self.session.execute(statement=statement)
+        await self.session.commit()
+        return _user
