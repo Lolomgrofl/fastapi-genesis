@@ -51,7 +51,7 @@ cookiecutter https://github.com/Lolomgrofl/fastapi_genesis.git
 └── setup.cfg               <- Configuration of various tools (pytest, flake8, black, isort)
 ```
 
-## Features 🧩 
+## Features 🧩
 
 - **Docker** and **docker-compose** for local development
 - **FastAPI** application with **uvicorn** server
