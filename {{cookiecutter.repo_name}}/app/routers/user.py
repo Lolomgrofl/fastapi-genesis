@@ -27,8 +27,8 @@ async def token(
 
 
 @router.get("/login", status_code=status.HTTP_200_OK)
-async def login(current_user=Depends(UserService.get_current_user)):
-    return current_user
+async def login(current_user=Depends(UserService.get_current_user)) -> UserOut:
+    return UserOut.model_validate(current_user)
 
 
 @router.get("/get_by_id/{user_id}", status_code=status.HTTP_200_OK)

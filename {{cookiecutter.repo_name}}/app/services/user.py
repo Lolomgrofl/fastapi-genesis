@@ -9,6 +9,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.daos import user
 from app.db import get_session
+from app.models.user import User as UserModel
 from app.schemas.token import Token, TokenData
 from app.schemas.user import ChangePasswordIn, UserIn, UserOut
 from app.services.utils import UtilsService, oauth2_scheme
@@ -35,16 +36,16 @@ class UserService:
         )
 
     @staticmethod
-    async def authenticate_user(session: AsyncSession, email: str, password: str):
+    async def authenticate_user(
+        session: AsyncSession, email: str, password: str
+    ) -> UserModel | bool:
         _user = await user.UserDao(session).get_by_email(email)
-        if not _user:
-            return False
-        if not UtilsService.verify_password(password, _user.password):
+        if not _user or not UtilsService.verify_password(password, _user.password):
             return False
         return _user
 
     @staticmethod
-    async def user_email_exists(session: AsyncSession, email: str):
+    async def user_email_exists(session: AsyncSession, email: str) -> UserModel | None:
         _user = await user.UserDao(session).get_by_email(email)
         return _user if _user else None
 
@@ -75,7 +76,7 @@ class UserService:
     async def get_current_user(
         session: AsyncSession = Depends(get_session),
         token: str = Depends(oauth2_scheme),
-    ) -> UserOut:
+    ) -> UserModel:
         credentials_exception = HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Could not validate credentials",
@@ -94,10 +95,10 @@ class UserService:
         _user = await user.UserDao(session).get_by_email(email=token_data.email)
         if not _user:
             raise credentials_exception
-        return UserOut.model_validate(_user)
+        return _user
 
     @staticmethod
-    async def get_all_users(session: AsyncSession):
+    async def get_all_users(session: AsyncSession) -> list[UserOut]:
         all_users = await user.UserDao(session).get_all()
         return [UserOut.model_validate(_user) for _user in all_users]
 
@@ -112,18 +113,20 @@ class UserService:
     @staticmethod
     async def change_password(
         password_data: ChangePasswordIn,
-        current_user,
+        current_user: UserModel,
         session: AsyncSession = Depends(get_session),
     ):
-        _user = await user.UserDao(session).get_by_id(current_user.id)
-        logger.info(f"Current user: {current_user}")
-        if not UtilsService.verify_password(password_data.old_password, _user.password):
+        if not UtilsService.verify_password(
+            password_data.old_password, current_user.password
+        ):
             raise HTTPException(
                 status_code=status.HTTP_400_BAD_REQUEST,
                 detail="Incorrect old password!!!",
             )
-        _user.password = UtilsService.get_password_hash(password_data.new_password)
-        session.add(_user)
+        current_user.password = UtilsService.get_password_hash(
+            password_data.new_password
+        )
+        session.add(current_user)
         await session.commit()
         return JSONResponse(
             content={"message": "Password updated successfully!!!"},
