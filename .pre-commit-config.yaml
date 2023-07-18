@@ -2,12 +2,12 @@ default_language_version:
     python: python3.10
 repos:
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.0.275
+    rev: v0.0.278
     hooks:
     - id: ruff
       args: [ --fix, --exit-non-zero-on-fix, --exclude, alembic]
   - repo: https://github.com/asottile/pyupgrade
-    rev: v3.7.0
+    rev: v3.9.0
     hooks:
     -   id: pyupgrade
         args:
@@ -15,7 +15,7 @@ repos:
         - --keep-runtime-typing
 
   - repo: https://github.com/psf/black
-    rev: 23.1.0
+    rev: 23.7.0
     hooks:
       - id: black
         args: [--safe]
