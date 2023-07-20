@@ -9,7 +9,6 @@ readme = "README.md"
 python = "^3.10"
 alembic = "^1.11.1"
 loguru = "^0.7.0"
-docker-compose = "^1.29.2"
 fastapi = {extras = ["all"], version = "^0.100.0"}
 python-jose = {extras = ["cryptography"], version = "^3.3.0"}
 passlib = {extras = ["bcrypt"], version = "^1.7.4"}
