@@ -14,7 +14,7 @@ help: ## Show this help (usage: make help)
 
 .PHONY: build
 build:	## Build project with docker-compose
-	docker-compose build
+	docker-compose up --build
 
 .PHONY: up
 up:	## Run project with docker-compose

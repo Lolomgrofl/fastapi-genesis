@@ -32,24 +32,38 @@ To set up and run the app, please follow these steps:
    ```shell
    poetry shell
    ```
-4. Build and start the Docker containers:
+
+4. All necessary commands to start with the project can be found in Makefile.
+   To see all available commands, run the following command:
 
    ```shell
-   docker-compose up --build
+   make help
    ```
-5. Open your browser and go to `http://localhost:{{ cookiecutter.app_service_port }}` to see the app running.
 
-6. Since there is only one SQLAlchemy model, you can create a new migration file by running the following command:
+5. Build and start the Docker containers:
+
+   ```shell
+   make build
+   ```
+
+6. Open your browser and go to `http://localhost:{{ cookiecutter.app_service_port }}` to see the app running.
+
+7. Since there is only one SQLAlchemy model, you can create a new migration file by running the following command:
 
    ```shell
    chmod -R +x scripts/
    ./scripts/autogenerate.sh "user_init"
    ```
+   or
+   ```shell
+   make autogenerate msg="user_init"
+   ```
+
    This will create a new migration file in `{{ cookiecutter.repo_name }}/alembic/versions/`.
 
    Since the `app` service inside `docker-compose.yaml` will automatically run the `alembic upgrade head` command whenever it starts, in order to apply the new migration, you just need to stop the containers and start them again. CTRL+C to stop the containers and then run the following command to start them again:
    ```shell
-   docker-compose up
+   make up
    ```
 
 8. To check the documentation of the API, go to `http://localhost:{{ cookiecutter.app_service_port }}/docs`.
