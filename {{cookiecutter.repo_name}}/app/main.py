@@ -1,7 +1,8 @@
-from app.routers.api_router import api_router
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
+
+from app.routers.api_router import api_router
 
 app = FastAPI(title="So Fast Project", version="0.1.0")
 
