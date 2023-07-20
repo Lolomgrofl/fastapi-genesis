@@ -9,7 +9,6 @@ readme = "README.md"
 python = "^3.10"
 alembic = "^1.11.1"
 loguru = "^0.7.0"
-docker-compose = "^1.29.2"
 fastapi = {extras = ["all"], version = "^0.100.0"}
 python-jose = {extras = ["cryptography"], version = "^3.3.0"}
 passlib = {extras = ["bcrypt"], version = "^1.7.4"}
@@ -23,8 +22,52 @@ isort = "^5.12.0"
 mypy = "^1.4.1"
 black = "^23.7.0"
 pytest = "^7.4.0"
-flake8 = "^6.0.0"
 pre-commit = "^3.3.3"
+
+[tool.black]
+line-length = 120
+target-version = ['py310']
+include = '\.pyi?$'
+exclude-extend = '''
+/venv
+/.venv
+/__pycache__
+/.mypy_cache
+/.pytest_cache
+/db.sqlite3
+/alembic
+'''
+
+[tool.ruff]
+line-length = 120
+select = ["E", "F", "UP", "I"]
+ignore = ["E501"]
+fixable = ["A", "B", "C", "D", "E", "F", "I"]
+exclude = [
+    ".direnv",
+    ".eggs",
+    ".git",
+    ".mypy_cache",
+    ".pytype",
+    ".ruff_cache",
+    ".svn",
+    ".tox",
+    ".venv",
+    "migrations",
+    "__pypackages__",
+    "buck-out",
+    "build",
+    "dist",
+    "node_modules",
+    "venv",
+    "alembic"
+]
+
+[tool.ruff.isort]
+section-order = ["future", "fastapi", "standard-library", "third-party",  "first-party", "local-folder"]
+
+[tool.ruff.isort.sections]
+fastapi = ["fastapi"]
 
 [build-system]
 requires = ["poetry-core"]
