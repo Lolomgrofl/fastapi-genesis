@@ -1,8 +1,9 @@
-from datetime import timedelta
-
 from fastapi import Depends, HTTPException, status
 from fastapi.responses import JSONResponse
 from fastapi.security import OAuth2PasswordRequestForm
+
+from datetime import timedelta
+
 from jose import JWTError, jwt
 from loguru import logger
 from sqlalchemy.ext.asyncio import AsyncSession

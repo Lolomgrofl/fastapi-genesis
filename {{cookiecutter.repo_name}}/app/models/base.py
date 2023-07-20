@@ -1,5 +1,6 @@
-from sqlalchemy.orm import DeclarativeBase, mapped_column
 from typing import Annotated
+
+from sqlalchemy.orm import DeclarativeBase, mapped_column
 
 
 class Base(DeclarativeBase):
