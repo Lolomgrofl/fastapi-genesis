@@ -39,13 +39,14 @@ exclude = '''
   | buck-out
   | build
   | dist
-  | migrations
+  | alembic
 )/
 '''
 
 [tool.ruff]
 line-length = 120
-select = ["E", "F", "I"]
+select = ["E", "F", "UP", "I"]
+ignore = ["E501"]
 fixable = ["A", "B", "C", "D", "E", "F", "I"]
 exclude = [
     ".direnv",
@@ -63,11 +64,12 @@ exclude = [
     "build",
     "dist",
     "node_modules",
-    "venv"
+    "venv",
+    "alembic"
 ]
 
 [tool.ruff.isort]
-section-order = ["fastapi", "future", "standard-library", "third-party",  "first-party", "local-folder"]
+section-order = ["future", "fastapi", "standard-library", "third-party",  "first-party", "local-folder"]
 
 [tool.ruff.isort.sections]
 fastapi = ["fastapi"]
