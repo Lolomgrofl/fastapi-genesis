@@ -36,9 +36,7 @@ class UserService:
         )
 
     @staticmethod
-    async def authenticate_user(
-        session: AsyncSession, email: str, password: str
-    ) -> UserModel | bool:
+    async def authenticate_user(session: AsyncSession, email: str, password: str) -> UserModel | bool:
         _user = await user.UserDao(session).get_by_email(email)
         if not _user or not UtilsService.verify_password(password, _user.password):
             return False
@@ -50,12 +48,8 @@ class UserService:
         return _user if _user else None
 
     @staticmethod
-    async def login(
-        form_data: OAuth2PasswordRequestForm, session: AsyncSession
-    ) -> Token:
-        _user = await UserService.authenticate_user(
-            session, form_data.username, form_data.password
-        )
+    async def login(form_data: OAuth2PasswordRequestForm, session: AsyncSession) -> Token:
+        _user = await UserService.authenticate_user(session, form_data.username, form_data.password)
         if not _user:
             raise HTTPException(
                 status_code=status.HTTP_400_BAD_REQUEST,
@@ -63,9 +57,7 @@ class UserService:
             )
 
         access_token_expires = timedelta(minutes=settings.ACCESS_TOKEN_EXPIRE_MINUTES)
-        access_token = UtilsService.create_access_token(
-            data={"sub": _user.email}, expires_delta=access_token_expires
-        )
+        access_token = UtilsService.create_access_token(data={"sub": _user.email}, expires_delta=access_token_expires)
         token_data = {
             "access_token": access_token,
             "token_type": "Bearer",
@@ -83,9 +75,7 @@ class UserService:
             headers={"WWW-Authenticate": "Bearer"},
         )
         try:
-            payload = jwt.decode(
-                token, settings.SECRET_KEY, algorithms=[settings.ALGORITHM]
-            )
+            payload = jwt.decode(token, settings.SECRET_KEY, algorithms=[settings.ALGORITHM])
             email: str = payload.get("sub")
             if not email:
                 raise credentials_exception
@@ -116,16 +106,12 @@ class UserService:
         current_user: UserModel,
         session: AsyncSession = Depends(get_session),
     ):
-        if not UtilsService.verify_password(
-            password_data.old_password, current_user.password
-        ):
+        if not UtilsService.verify_password(password_data.old_password, current_user.password):
             raise HTTPException(
                 status_code=status.HTTP_400_BAD_REQUEST,
                 detail="Incorrect old password!!!",
             )
-        current_user.password = UtilsService.get_password_hash(
-            password_data.new_password
-        )
+        current_user.password = UtilsService.get_password_hash(password_data.new_password)
         session.add(current_user)
         await session.commit()
         return JSONResponse(
