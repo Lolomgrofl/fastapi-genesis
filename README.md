@@ -44,6 +44,8 @@ cookiecutter https://github.com/Lolomgrofl/fastapi_genesis.git
 │
 ├── Dockerfile              <- Dockerfile for building the image of the application
 │
+├── Makefile                <- Makefile with useful commands for development and project setup
+│
 ├── pyproject.toml          <- Python dependencies for Poetry (see https://python-poetry.org/)
 │
 ├── README.md               <- File with useful information about the project and how to use it
