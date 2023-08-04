@@ -49,8 +49,6 @@ cookiecutter https://github.com/Lolomgrofl/fastapi_genesis.git
 ├── pyproject.toml          <- Python dependencies for Poetry (see https://python-poetry.org/)
 │
 ├── README.md               <- File with useful information about the project and how to use it
-│
-└── setup.cfg               <- Configuration of various tools (pytest, flake8, black, isort)
 ```
 
 ## Features 🧩
