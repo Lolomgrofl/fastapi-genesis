@@ -2,7 +2,7 @@ default_language_version:
     python: python3.10
 repos:
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.0.287
+    rev: v0.0.288
     hooks:
     - id: ruff
       args: [ --fix, --exit-non-zero-on-fix, --exclude, alembic]
@@ -15,7 +15,7 @@ repos:
         - --keep-runtime-typing
 
   - repo: https://github.com/psf/black
-    rev: 23.7.0
+    rev: 23.9.1
     hooks:
       - id: black
         args: [--safe]
