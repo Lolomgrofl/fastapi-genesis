@@ -7,7 +7,7 @@ Go to the directory where you want to create your project and run:
 
 ```bash
 pip install cookiecutter
-cookiecutter https://github.com/Lolomgrofl/fastapi_genesis.git
+cookiecutter https://github.com/Lolomgrofl/fastapi-genesis.git
 ```
 
 ## What's included in the template 🎉
