@@ -1,14 +1,17 @@
 from collections.abc import AsyncGenerator
 
-from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine
-from sqlalchemy.orm import sessionmaker
+from sqlalchemy.ext.asyncio import (
+    AsyncSession,
+    async_sessionmaker,
+    create_async_engine,
+)
 
 from app.settings import settings
 
 postgres_url = settings.POSTGRES_URL.unicode_string()
 
 engine = create_async_engine(postgres_url, echo=True, future=True)
-AsyncSessionFactory = sessionmaker(
+AsyncSessionFactory = async_sessionmaker(
     autocommit=False,
     autoflush=False,
     expire_on_commit=False,
