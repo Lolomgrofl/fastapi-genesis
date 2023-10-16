@@ -14,6 +14,8 @@ cookiecutter https://github.com/Lolomgrofl/fastapi-genesis.git
 
 - Here is an explanation of the directory structure of the template:
 ```
+├── .github                 <- GitHub deployment workflow
+│
 ├── alembic                 <- Alembic migrations
 │
 ├── app                     <- Source code of the application (the main package)
@@ -63,6 +65,7 @@ cookiecutter https://github.com/Lolomgrofl/fastapi-genesis.git
 - **JWT** token authentication
 - **SQLAlchemy** models
 - **CORS** (Cross Origin Resource Sharing)
+- **GitOps** ( GitHub Workflows)
 
 ## User flow as an example of how to use the template 💡
 
