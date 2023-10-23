@@ -1,0 +1,1 @@
+# The logic for the release.yml action is not inside this file, but rather inside the .gitkeep file in the same directory. The .gitkeep file is used to keep the directory in version control even if it is empty.
