@@ -51,11 +51,6 @@ To set up and run the app, please follow these steps:
 7. Since there is only one SQLAlchemy model, you can create a new migration file by running the following command:
 
    ```shell
-   chmod -R +x scripts/
-   ./scripts/autogenerate.sh "user_init"
-   ```
-   or
-   ```shell
    make autogenerate msg="user_init"
    ```
 
