@@ -73,7 +73,9 @@ cookiecutter https://github.com/Lolomgrofl/fastapi-genesis.git
 ```
     - Register a new user
     - Login with the new user
+    - Change password 
     - Get all users
+    - Delete user by id
     - Delete all users
 ```
 - This following example will show you the pattern and good practices to follow in order to continue developing your application.
