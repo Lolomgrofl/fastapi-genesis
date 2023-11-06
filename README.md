@@ -73,7 +73,7 @@ cookiecutter https://github.com/Lolomgrofl/fastapi-genesis.git
 ```
     - Register a new user
     - Login with the new user
-    - Change password 
+    - Change password
     - Get all users
     - Delete user by id
     - Delete all users
