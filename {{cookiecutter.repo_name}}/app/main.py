@@ -1,10 +1,12 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
+from app.settings import settings
+from app import __version__
 
 from app.routers.api_router import api_router
 
-app = FastAPI(title="So Fast Project", version="0.1.0")
+app = FastAPI(title=settings.PROJECT_NAME, version=__version__)
 
 app.add_middleware(
     CORSMiddleware,
