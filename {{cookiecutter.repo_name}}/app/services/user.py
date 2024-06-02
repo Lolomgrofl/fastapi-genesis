@@ -1,9 +1,9 @@
-from typing import Annotated
 from fastapi import Depends, HTTPException, status
 from fastapi.responses import JSONResponse
 from fastapi.security import OAuth2PasswordRequestForm
 
 from datetime import timedelta
+from typing import Annotated
 
 from jose import JWTError, jwt
 from loguru import logger
@@ -143,5 +143,6 @@ class UserService:
             content={"message": "User deleted successfully!!!"},
             status_code=status.HTTP_200_OK,
         )
+
 
 CurrentUserDep = Annotated[UserModel, Depends(UserService.get_current_user)]

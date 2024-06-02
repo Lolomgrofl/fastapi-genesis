@@ -1,10 +1,10 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
-from app.settings import settings
-from app import __version__
 
+from app import __version__
 from app.routers.api_router import api_router
+from app.settings import settings
 
 app = FastAPI(title=settings.PROJECT_NAME, version=__version__)
 
